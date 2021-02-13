@@ -4,6 +4,5 @@ src/process_text.py
 src/scrape_source.py
 src/generate.py
 src/model.py
-src/neural_network.py
 src/utilities.py
 environment.yml
