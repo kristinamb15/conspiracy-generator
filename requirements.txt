@@ -21,7 +21,7 @@ joblib
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
 matplotlib
-mkl-fft==1.2.0
+mkl_fft==1.2.0
 mkl-random==1.1.1
 mkl-service==2.3.0
 nltk
