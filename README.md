@@ -41,33 +41,9 @@ Install environment:
 ### ▶ Files
 
     📦TextGenerator
-    ** ----- Due to large file sizes - these files are omitted from the repository ----- **
-    ┣ 📂data                                
-    ┃ ┣ 📂processed                         # Data split into sequences for training
-    ┃ ┃ ┣ 📜conspiracy_text_all.csv
-    ┃ ┃ ┣ 📜conspiracy_text_min2.csv
-    ┃ ┃ ┣ 📜conspiracy_text_minimal.csv
-    ┃ ┃ ┣ 📜conspiracy_text_no_stops.csv
-    ┃ ┃ ┗ 📜conspiracy_text_stops.csv
-    ┃ ┗ 📂raw                               # Data cleaned in various ways
-    ┃ ┃ ┣ 📜conspiracy_df.csv                   # Dataframe with urls and all raw text data
-    ┃ ┃ ┣ 📜raw_text_min2.txt                   # Concatenated text from dataframe column ↓
-    ┃ ┃ ┣ 📜raw_text_minimal.txt                
-    ┃ ┃ ┣ 📜raw_text_no_stops.txt
-    ┃ ┃ ┗ 📜raw_text_stops.txt
-    ┣ 📂models                              # Various trained models
-    ┃ ┣ 📂02-09-2021_(21.47.25)             # Each model folder consists of:
-    ┃ ┃ ┣ 📜loss.png                            # Plot of training/validation loss per epoch    
-    ┃ ┃ ┣ 📜model.pt                            # Saved model
-    ┃ ┃ ┣ 📜model_params.pt                     # Saved model parameters
-    ┃ ┃ ┣ 📜optim_params.pt                     # Saved optimizer paramters
-    ┃ ┃ ┣ 📜output.txt                          # Model details and training output
-    ┃ ┃ ┗ 📜vocab                               # Saved model vocabulary
-    ┃ ┣ 📂02-09-2021_(23.18.19)
-    ┃ ┣ 📂02-10-2021_(16.23.57)
-    ┃ ┣ 📂02-11-2021_(01.07.02)
-    ┃ ┗ 📂02-11-2021_(05.15.55)
-    ** -------------------------------------------------------------------------------- **
+    ┣ 📂model
+    ┃ ┣ 📜model.pt
+    ┃ ┗ 📜vocab
     ┣ 📂src
     ┃ ┣ 📜generate.py                       # Generate text from seed text
     ┃ ┣ 📜model.py                          # Define and train model
@@ -77,27 +53,22 @@ Install environment:
     ┃ ┣ 📜scrape_source.py                  # Scrape text from Wikipedia
     ┃ ┣ 📜utilities.py                      # Imports and things used in other scripts
     ┃ ┗ 📜__init__.py
-    ┣ 📂webapp                              # Flask web application
-    ┃ ┣ 📂model
-    ┃ ┃ ┣ 📜model.pt
-    ┃ ┃ ┗ 📜vocab
-    ┃ ┣ 📂static                            # App styling
-    ┃ ┃ ┣ 📜background.jpg
-    ┃ ┃ ┣ 📜favicon.png
-    ┃ ┃ ┗ 📜style.css
-    ┃ ┣ 📂templates                         # App html templates
-    ┃ ┃ ┣ 📜generated.html
-    ┃ ┃ ┗ 📜main.html
-    ┃ ┣ 📜app.py                            # Main application file
-    ┃ ┣ 📜Procfile
-    ┃ ┣ 📜requirements.txt
-    ┃ ┗ 📜runtime.txt
+    ┣ 📂static                              # App styling
+    ┃ ┣ 📜background.jpg
+    ┃ ┣ 📜favicon.png
+    ┃ ┗ 📜style.css
+    ┣ 📂templates                           # App html templates
+    ┃ ┣ 📜generated.html
+    ┃ ┗ 📜main.html
     ┣ 📜.gitattributes
     ┣ 📜.gitignore
+    ┣ 📜app.py                              # Flask web application
     ┣ 📜environment.yml
     ┣ 📜example.PNG                         # Example screenshot of app
-    ┣ 📜Notes.txt
-    ┗ 📜README.md
+    ┣ 📜Procfile
+    ┣ 📜README.md
+    ┣ 📜requirements.txt
+    ┗ 📜runtime.txt
 
 ---
 
@@ -109,7 +80,7 @@ Install environment:
 
 The Wikipedia [Category: Conspiracy theories in the United States](https://en.m.wikipedia.org/wiki/Category:Conspiracy_theories_in_the_United_States) page was scraped for urls, and those pages were then scraped for all of their text content.
 
-A dataframe consisting of the urls and their text content was saved in:
+A dataframe consisting of the urls and their text content was saved in (due to large file size, the ```data``` directory is omitted from the repository):
 
     data/raw/conspiracy_df.csv
 
@@ -127,7 +98,7 @@ The raw text was split into sequences, each consisting of five words (this can b
 
     Example data:  {'text': ['district', 'for', 'nine', 'terms', 'downing'], 'target': ['for', 'nine', 'terms', 'downing', 'was']}
 
-A data frame was created for each text collection consisting of all text and target pairs. These were then saved to file in the ```data/processed``` directory.
+A data frame was created for each text collection consisting of all text and target pairs. These were then saved to file in the ```data/processed``` directory, but due to large file sizes, these are omitted from the repository.
 
 ---
 
@@ -159,7 +130,7 @@ Data was split into training and validation sets and batches were prepared. A nu
 
 The GloVe pretrained word embedding was used to embed the word sequences. Specifically, ```glove.6B.300d``` was used because it was obtained from Wikipedia, which is where our text data originates, so the embedding dimension is fixed at 300.
 
-For every training run, a folder in the ```models``` directory was created named with a timestamp. Best parameters for the model and optimizer are saved for loading at a later time . Visualization of test and validation loss, as well as the output from the training are saved in the folder for the model.
+For every training run, a folder in the ```models``` directory was created named with a timestamp. Best parameters for the model and optimizer are saved for loading at a later time . Visualization of test and validation loss, as well as the output from the training are saved in the folder for the model. Due to large file sizes, the ```models``` directory is omitted from the repository. The final model used for the web app is saved in the ```model``` directory.
 
 Note: Running in Google Colab may decrease training time (it was faster than the GPU on my machine).
 
