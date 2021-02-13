@@ -3,6 +3,14 @@
 # Commented for webapp purposes - uncomment to run as script
 # from utilities import *
 
+# Torch imports - uncomment if using utilities import
+import torch
+from torch import nn
+import torch.nn.functional as F
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+
 # Define NN
 class TextGenerator(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers, bidirectional, dropout, pad_idx):

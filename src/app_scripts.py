@@ -2,13 +2,9 @@
 
 import numpy as np
 import random
-import torch
-from torch import nn
-import torch.nn.functional as F
 from IPython.display import clear_output
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-
+from neural_network import *
 
 def predict_next(model, word, token2int, int2token, hidden=None, wordlist=None):
     """Predicts next word from given word.
