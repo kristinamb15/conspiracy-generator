@@ -2,7 +2,5 @@ example.PNG
 src/prepare_data.py
 src/process_text.py
 src/scrape_source.py
-src/generate.py
 src/model.py
-src/utilities.py
 environment.yml
