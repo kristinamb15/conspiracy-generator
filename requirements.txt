@@ -40,7 +40,7 @@ regex
 requests
 scipy==1.6.0
 seaborn
-sip==4.19.13
+sip
 six
 soupsieve
 torch==1.7.1
