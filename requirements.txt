@@ -21,7 +21,6 @@ joblib
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
 matplotlib
-mkl-service==2.3.0
 nltk
 numpy
 olefile==0.46
