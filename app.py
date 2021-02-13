@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 def load_model():
     # Load model
-    model = torch.load('model/model.pt')
+    model = torch.load('model/model.pt', map_location=torch.device('cpu'))
 
     # Load vocab
     vocab = torch.load('model/vocab')
