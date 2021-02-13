@@ -1,0 +1,302 @@
+/* General reset */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+/* General styles */
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: white;
+    box-sizing: border-box;
+    background-image: linear-gradient(to right bottom, rgba(55, 53, 59, 0.8), rgba(36, 35, 37, 0.8)), url(background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+}
+
+::selection {
+    background-color: rgb(14, 143, 42);
+    color: white;
+}
+
+.container {
+    padding: 5rem;
+    width: 95%;
+    height: 100vh;
+    display: grid;
+    row-gap: 2rem;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'title'
+                         'form'
+                         'response'
+                         'footer';
+    justify-items: center;
+    align-content: space-between;        
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+/* Main title */
+.main_title {
+    grid-area: title;
+    text-align: center;
+    font-weight: 400;
+    font-size: 10rem;
+    font-family: 'Libre Barcode 39 Text', cursive;
+    text-shadow: 2px 2px 8px rgb(14, 143, 42);
+}
+
+/* Form */
+.form_container {
+    width: 80%;
+    grid-area: form;
+    display: grid;
+    row-gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 2fr 1fr;
+    grid-template-areas: 'input-text'
+                         'input-length'
+                         'button';
+    justify-items: center;
+    align-items: center;
+}
+
+/* Seed/length form containers */
+.input_container {
+    display: grid;
+    width: 100%;
+    row-gap: .5rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: 'label' 
+                         'instruct'
+                         'input';
+    justify-items: center;
+    align-items: center;
+}
+
+.form_text {
+    grid-area: input-text;
+}
+
+.form_length {
+    grid-area: input-length;
+}
+
+/* Form labels */
+label {
+    font-size: 2rem;
+    text-transform: uppercase;
+    align-self: end;
+}
+
+.label_text {
+    grid-area: label;
+}
+
+.label_length {
+    grid-area: label;
+}
+
+/* Form input fields */
+.input {
+    background-color: lightgrey;
+    border: none;
+    padding: 1rem;
+    border-radius: 3px;
+    font-size: 2rem;
+}
+
+.input:focus {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.input_text {
+    grid-area: input;
+    width: 50%;
+    height: 5rem;
+}
+
+.input_length {
+    grid-area: input;
+    width: 10%;
+    height: 3rem;
+}
+
+/* Form istructions */
+.instruct{
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+    align-self: start;
+    width: 60%;
+}
+
+.instruct_text {
+    grid-area: instruct;
+}
+
+.instruct_length {
+    grid-area: instruct;
+}
+
+/* Button */
+.form_button {
+    grid-area: button;
+    display: flex;
+    gap: 5rem;
+}
+
+.button {
+    border-radius: 1rem;
+    background-color: indianred;
+    color: white;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all .3s;
+    font-size: 2rem;
+}
+
+.button:hover {
+    transform: scale(1.2) translate3d(0, 0, 1px);
+    perspective: 1px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.6);
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:active {
+    transform: scale(0.9) translate3d(0, 0, 0);
+    filter: none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+.redo {
+    position: relative;
+}
+
+/* Tooltip on redo button hover */
+.tooltip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    background-color: white;
+    border-radius: 4px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: grey;
+    padding: 1rem; 
+    opacity: 0;
+    position: absolute;
+    top: 130%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
+    z-index: 2;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.6);
+}
+
+.redo:hover > .tooltip {
+    opacity: 1;
+    transition: all .5s;
+}
+
+.tooltip::before {
+    content: '';
+    margin-top: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+    position: absolute;
+    right: 45%;
+    bottom: 85%;
+    z-index: 1;
+}
+
+/* Generated text */
+.response {
+    grid-area: response;
+    padding: 1.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+    color: rgb(14, 143, 42);
+    background-color: rgba(19, 19, 20, 0.705);
+    border-radius: 5px;
+    font-family: 'Share Tech Mono', monospace;
+    width: 70%;
+}
+
+/* Footer */
+.footer {
+    grid-area: footer;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-self: end;
+}
+
+a:link,
+a:hover,
+a:active,
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* Media queries */
+/* 1em = 16px
+   1282 px = 80.125em
+   1572 px = 98.25em
+   1136 px = 71em
+*/
+
+@media only screen and (max-width: 98.25em){
+    .main_title {
+        font-size: 8rem;
+    }
+}
+
+@media only screen and (max-width: 80.125em){
+    .main_title {
+        font-size: 7rem;
+    }
+}
+
+@media only screen and (max-width: 71em){
+    .main_title {
+        font-size: 6rem;
+    }
+}
+
+
+/*
+FONTS
+
+font-family: 'Lato', sans-serif;
+font-family: 'Libre Barcode 39 Text', cursive;
+font-family: 'Share Tech Mono', monospace;
+*/
