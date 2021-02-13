@@ -1,0 +1,6 @@
+__pycache__/
+.vector_cache/
+.vscode/
+Notes.txt
+data/
+models/
