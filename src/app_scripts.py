@@ -9,42 +9,6 @@ from IPython.display import clear_output
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-# Define NN
-class TextGenerator(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers, bidirectional, dropout, pad_idx):
-        super().__init__()
-        self.hidden_dim = hidden_dim
-        self.n_layers = n_layers
-        self.embedding_dim = embedding_dim
-        self.bidirectional = bidirectional
-
-        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=pad_idx)
-        self.rnn = nn.LSTM(embedding_dim, hidden_dim, num_layers=n_layers, bidirectional=bidirectional, dropout=dropout, batch_first=True)
-        self.fc = nn.Linear(hidden_dim*2 if bidirectional else hidden_dim, output_dim)
-        self.dropout = nn.Dropout(dropout)
-
-    def forward(self, text, hidden):
-        # text dimensions: [sent len, batch size]
-
-        embedded = self.dropout(self.embedding(text))
-        # embedded dimensions: [sent len, batch size, emb dim]
-
-        output, hidden = self.rnn(embedded, hidden)
-
-        output = output.reshape(-1, self.hidden_dim * 2 if self.bidirectional else self.hidden_dim)
-        # output dimensions = [sent len, batch size, hid dim * num directions]
-        # hidden state is really (hidden, cell) where:    
-        # hidden dimensions = [num layers * num directions, batch size, hid dim]
-        # cell dimensions: = [num layers * num directions, batch size, hid dim]
-
-        return self.fc(output), hidden
-        # hidden = [batch size, hid dim * num directions]
-
-    # Initialize hidden state
-    def init_hidden(self, batch_size):
-        # Two tensors of size [n_layers * 2, batch_size, hidden_dim]
-        return (torch.zeros(2 * self.n_layers if self.bidirectional else self.n_layers, batch_size, self.hidden_dim).to(device),
-                torch.zeros(2* self.n_layers if self.bidirectional else self.n_layers, batch_size, self.hidden_dim).to(device))
 
 def predict_next(model, word, token2int, int2token, hidden=None, wordlist=None):
     """Predicts next word from given word.

@@ -1,5 +1,7 @@
 # Text generating neural network and associated fucntions
-from utilities import *
+
+# Commented for webapp purposes - uncomment to run as script
+# from utilities import *
 
 # Define NN
 class TextGenerator(nn.Module):
