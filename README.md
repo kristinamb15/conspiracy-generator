@@ -10,9 +10,7 @@ Here's an example (seed text in *italics*):
 
 > *cute puppies conspired with* saddam husseins regime and that saudi royal president muammar gaddafi
 
-To try it yourself, check out my web application!
-
-![image info](example.png)
+To try it yourself, check out my [web application](https://conspiracy-generator.herokuapp.com/)!
 
 **Language:** Python <br>
 **Libraries/Modules for Standard Things:** os, sys, time, random, numpy, pandas
