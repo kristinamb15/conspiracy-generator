@@ -1,9 +1,50 @@
-# Generate text
+# Isolated versions of imports and functions required by webapp
 
-from utilities import *
-from neural_network import TextGenerator
-
+import numpy as np
+import random
+import torch
+from torch import nn
+import torch.nn.functional as F
 from IPython.display import clear_output
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+# Define NN
+class TextGenerator(nn.Module):
+    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers, bidirectional, dropout, pad_idx):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.n_layers = n_layers
+        self.embedding_dim = embedding_dim
+        self.bidirectional = bidirectional
+
+        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=pad_idx)
+        self.rnn = nn.LSTM(embedding_dim, hidden_dim, num_layers=n_layers, bidirectional=bidirectional, dropout=dropout, batch_first=True)
+        self.fc = nn.Linear(hidden_dim*2 if bidirectional else hidden_dim, output_dim)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, text, hidden):
+        # text dimensions: [sent len, batch size]
+
+        embedded = self.dropout(self.embedding(text))
+        # embedded dimensions: [sent len, batch size, emb dim]
+
+        output, hidden = self.rnn(embedded, hidden)
+
+        output = output.reshape(-1, self.hidden_dim * 2 if self.bidirectional else self.hidden_dim)
+        # output dimensions = [sent len, batch size, hid dim * num directions]
+        # hidden state is really (hidden, cell) where:    
+        # hidden dimensions = [num layers * num directions, batch size, hid dim]
+        # cell dimensions: = [num layers * num directions, batch size, hid dim]
+
+        return self.fc(output), hidden
+        # hidden = [batch size, hid dim * num directions]
+
+    # Initialize hidden state
+    def init_hidden(self, batch_size):
+        # Two tensors of size [n_layers * 2, batch_size, hidden_dim]
+        return (torch.zeros(2 * self.n_layers if self.bidirectional else self.n_layers, batch_size, self.hidden_dim).to(device),
+                torch.zeros(2* self.n_layers if self.bidirectional else self.n_layers, batch_size, self.hidden_dim).to(device))
 
 def predict_next(model, word, token2int, int2token, hidden=None, wordlist=None):
     """Predicts next word from given word.
@@ -96,63 +137,3 @@ def generate_text(model, gen_len, text, token2int, int2token, end_words=False, r
         tokens.append(token)
   
     return ' '.join(tokens)
-
-def make_conspiracy(text=None, length=None, repeats=False):
-    """Asks for seed text and length and generates conspiracy theory.
-
-    Args:
-        text: text to generate from.
-        length: number of words to add.
-        repeats: whether or not to check for repeated words.
-    Returns:
-        Generated text.
-
-    """
-    while True:
-        # Clear output
-        #os.system('cls')
-        clear_output()
-
-        # Gather arguments
-        if text is None:
-            text = str(input('Enter seed text (lowercase): '))
-            length = int(input('Enter number of words to generate: '))
-            repeats = bool(int(input('Restrict repeated words (1 for True, 0 for False): ')))
-
-        # Generate text
-        generated = generate_text(model, length, text, token2int=vocab.stoi, int2token=vocab.itos, repeats=repeats)
-        print('\n' + generated)
-
-        # Ask to generate again, get new input, or quit
-        instruct = ''
-        while instruct not in [0, 1, 2]:
-            instruct = int(input("\nType 0 to generate from the same input.\nType 1 to give new input.\nType 2 to quit.\n"))
-            if instruct not in [0, 1, 2]:
-                print('\nSorry, that is not a valid choice.')
-        if instruct == 2:
-            break
-        elif instruct == 0:
-            # Generate again from same input 
-            make_conspiracy(text, length, repeats)
-            break
-        elif instruct == 1:
-            # Ask for new input
-            make_conspiracy()
-            break
-
-if __name__ == '__main__':
-    #os.system('cls')
-    clear_output()
-
-    model_path = str(input('Model path: '))
-
-    print('Preparing model...')
-
-    # Load vocab
-    vocab = torch.load(f'{model_path}/vocab')
-
-    # Load model
-    model = torch.load(f'{model_path}/model.pt')
-
-    # Generate
-    make_conspiracy()

@@ -7,8 +7,8 @@ import sys
 sys.path.insert(0, './src')
 
 # Import modules from src
-from generate import *
-from neural_network import TextGenerator
+from app_scripts import *
+#from neural_network import TextGenerator
 
 app = Flask(__name__)
 
