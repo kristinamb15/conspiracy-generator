@@ -22,47 +22,54 @@ To try it yourself, check out my [web application](https://conspiracy-generator.
 
 ## **The Important Stuff**
 
-### ▶ The Web App
+### ⚫ The Web App
 
 Flask was used to deploy the model with Heroku.
 
-### ▶ Licensing & Use
+### ⚫ Licensing & Use
 
  - The files in this project are free for appropriate use under the Mozilla Public License 2.0 (see [LICENSE](LICENSE)).
 
-### ▶ Setup (if you want to run any of it)
+### ⚫ Setup (if you want to run any of it)
 
-Install environment: 
+Install environment (located in the ```env``` directory): 
 
     conda env create -f environment.yml
 
-### ▶ Files
+### ⚫ Files
 
     📦TextGenerator
-    ┣ 📂model
-    ┃ ┣ 📜model.pt
-    ┃ ┗ 📜vocab
-    ┣ 📂src
-    ┃ ┣ 📜generate.py                       # Generate text from seed text
-    ┃ ┣ 📜model.py                          # Define and train model
-    ┃ ┣ 📜neural_network.py                 # Define neural network
-    ┃ ┣ 📜prepare_data.py                   # Split data into sequences for training
-    ┃ ┣ 📜process_text.py                   # Clean text
-    ┃ ┣ 📜scrape_source.py                  # Scrape text from Wikipedia
-    ┃ ┣ 📜utilities.py                      # Imports and things used in other scripts
+    ┣ 📂env
+    ┃ ┗ 📜environment.yml                   # Environment file
+    ┣ 📂src                                 # Source code for scraping text/processing data/training network
+    ┃ ┣ 📜generate.py                         # Generate text from seed text
+    ┃ ┣ 📜model.py                            # Define and train model
+    ┃ ┣ 📜neural_network.py                   # Define neural network
+    ┃ ┣ 📜prepare_data.py                     # Split data into sequences for training
+    ┃ ┣ 📜process_text.py                     # Clean text
+    ┃ ┣ 📜scrape_source.py                    # Scrape text from Wikipedia
+    ┃ ┣ 📜utilities.py                        # Imports and things used in other scripts
     ┃ ┗ 📜__init__.py
-    ┣ 📂static                              # App styling
-    ┃ ┣ 📜background.jpg
-    ┃ ┣ 📜favicon.png
-    ┃ ┗ 📜style.css
-    ┣ 📂templates                           # App html templates
-    ┃ ┣ 📜generated.html
-    ┃ ┗ 📜main.html
+    ┣ 📂webapp                             # Webapp files/source code
+    ┃ ┣ 📂static
+    ┃ ┃ ┣ 📂css
+    ┃ ┃ ┃ ┗ 📜style.css
+    ┃ ┃ ┣ 📂img
+    ┃ ┃ ┃ ┣ 📜background.jpg
+    ┃ ┃ ┃ ┣ 📜favicon.png
+    ┃ ┃ ┃ ┗ 📜github.png
+    ┃ ┃ ┗ 📂model                          # Model parameters and vocabulary for loading
+    ┃ ┃ ┃ ┣ 📜model_params.pt
+    ┃ ┃ ┃ ┗ 📜vocab
+    ┃ ┣ 📂templates
+    ┃ ┃ ┣ 📜generated.html
+    ┃ ┃ ┗ 📜main.html
+    ┃ ┣ 📜scripts.py                       # Defining model and generating text
+    ┃ ┗ 📜__init__.py
     ┣ 📜.gitattributes
     ┣ 📜.gitignore
-    ┣ 📜app.py                              # Flask web application
-    ┣ 📜environment.yml
-    ┣ 📜example.PNG                         # Example screenshot of app
+    ┣ 📜.slugignore
+    ┣ 📜app.py                             # Main app file
     ┣ 📜Procfile
     ┣ 📜README.md
     ┣ 📜requirements.txt
@@ -72,23 +79,21 @@ Install environment:
 
 ## **Data Collection & Preparation**
 
-### ▶ Text Collection
+### ⚫ Text Collection
 
     scrape_source.py
 
 The Wikipedia [Category: Conspiracy theories in the United States](https://en.m.wikipedia.org/wiki/Category:Conspiracy_theories_in_the_United_States) page was scraped for urls, and those pages were then scraped for all of their text content.
 
-A dataframe consisting of the urls and their text content was saved in (due to large file size, the ```data``` directory is omitted from the repository):
+A dataframe consisting of the urls and their text content was saved (due to large file size, the ```data``` directory is omitted from the repository).
 
-    data/raw/conspiracy_df.csv
-
-### ▶ Text Processing
+### ⚫ Text Processing
 
     process_text.py
 
 Basic cleaning of text (lowercasing, removing punctuation/non-alphanumeric characters, removing citations of the form '[81]', removing '[citation needed]', etc.) was performed on the text column of the dataframe. This process was actually done a number of times to obtain different datasets (with/without stop words or hyphens). These columns were added to the dataframe created above and the file re-saved. 
 
-### ▶ Data Preparation
+### ⚫ Data Preparation
 
     prepare_data.py
 
@@ -96,13 +101,13 @@ The raw text was split into sequences, each consisting of five words (this can b
 
     Example data:  {'text': ['district', 'for', 'nine', 'terms', 'downing'], 'target': ['for', 'nine', 'terms', 'downing', 'was']}
 
-A data frame was created for each text collection consisting of all text and target pairs. These were then saved to file in the ```data/processed``` directory, but due to large file sizes, these are omitted from the repository.
+A data frame was created for each text collection consisting of all text and target pairs and was saved to file.
 
 ---
 
 ## **The Neural Network**
 
-### ▶ Defining the Network
+### ⚫ Defining the Network
 
     neural_network.py
 
@@ -110,7 +115,7 @@ The neural network along with functions for counting parameters, training, and e
 
 An LSTM with the option to have bidirectional layers is used, though output is better when bidirectional is set to ```False```, since we're working with just a long string of words.
 
-### ▶ Defining Parameters and Training the Model
+### ⚫ Defining Parameters and Training the Model
 
     model.py
 
@@ -173,5 +178,3 @@ A number of resources were consulted in making this project.
 - [Deploying PyTorch in Python via a REST API with Flask](https://colab.research.google.com/github/pytorch/tutorials/blob/gh-pages/_downloads/6c042f3d39855d2a2de414758e5f9836/flask_rest_api_tutorial.ipynb#scrollTo=Tsp_cU5B0NFm): for learning how to build a Flask app.
 
 - [Deploying a Flask Application to Heroku](https://stackabuse.com/deploying-a-flask-application-to-heroku/) and [Deploying Flask app on Heroku using GitHub](https://dev.to/lordofdexterity/deploying-flask-app-on-heroku-using-github-50nh): for learning how to deploy Flask app via GitHub/Heroku.
-
-- [Deploy Git subdirectory to Heroku](https://medium.com/@shalandy/deploy-git-subdirectory-to-heroku-ea05e95fce1f)

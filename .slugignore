@@ -1,6 +1,3 @@
 example.PNG
-src/prepare_data.py
-src/process_text.py
-src/scrape_source.py
-src/model.py
+src/
 environment.yml

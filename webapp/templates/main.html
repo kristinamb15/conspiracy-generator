@@ -2,10 +2,10 @@
 <html>
     <head>
         <title>Conspiracy Theory Generator</title>
-        <link href={{ url_for('static', filename='style.css') }} rel=stylesheet>
-        <link rel="shortcut icon" type="image/jpg" href={{ url_for('static', filename='favicon.png') }}>
+        <link href={{ url_for('static', filename='css/style.css') }} rel=stylesheet>
+        <link rel="shortcut icon" type="image/jpg" href={{ url_for('static', filename='img/favicon.png') }}>
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Libre+Barcode+39+Text&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Barrio&family=Lato:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class='container'>
@@ -13,7 +13,7 @@
           
             <form id='form' action="{{ url_for('generate')}}" method="post" class='form_container'>
                 <div class='input_container form_text'>
-                    <label class='label_text'>Seed Text</label>
+                    <label class='label_text'>Seed Text:</label>
                     <textarea 
                         class='input input_text' 
                         type="text" 
@@ -24,9 +24,8 @@
                     <p class='instruct instruct_text'>Enter the starting text of your theory - it helps if you include a noun, verb, and preposition/adverb. <br>
                     For example: 'puppies secretly plotted to'</p>
                 </div>
-                
                 <div class='input_container form_length'>
-                    <label class='label_length'>Length</label>
+                    <label class='label_length'>Length:</label>
                     <input 
                         class='input input_length' 
                         type="number" 
@@ -40,31 +39,37 @@
                     {% block button %}
                     {% endblock %}  
                 </div>
-            </form>
 
-            {% block generated %}
-            {% endblock %}            
+                {% block generated %}
+                {% endblock %}     
 
-            <footer>
-                <div class='footer'>
-                    <p>
-                        Copyright &copy; 2021 Kristina Brantley. All rights reserved.
-                    </p>
-                    <p>
-                        <a target="_blank" href="https://icons8.com/icons/set/planet-globe">UFO favicon</a> by <a target="_blank" href="https://icons8.com">Icons8</a>
-                    </p>
+            </form>            
+
+            <footer class='footer'>
+                <div class='footer_item copy'>
+                    Copyright &copy; 2021 Kristina Brantley. All rights reserved.
                 </div>
-            </footer>
+                <div class='footer_item favicon_link'>
+                    <a target="_blank" href="https://icons8.com/icons/set/planet-globe">UFO favicon by Icons8</a>
+                </div>
+                <div class='footer_item github_link'>
+                    <a target="_blank" href="https://github.com/kristinamb15/conspiracy-generator">View source <img src="../static/img/github.png" alt="git"> on GitHub</a>
+                </div>
+            </footer>                   
+
         </div>
+
     </body>
 
     <script>
+        const input_text = document.querySelector('.input_text');
+        const input_length = document.querySelector('.input_length');
+
         function reload() {
-            document.querySelector('.input_text').required = false;
+            input_text.removeAttribute('required');
             location.reload();
             return false;
         }
-    </script>
-    
+    </script>    
 
 </html>

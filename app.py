@@ -1,41 +1,55 @@
 # Web app to deploy model
 
 from flask import Flask, render_template, request
+import torch
 
-# Make sure imports work appropriately
-import sys
-sys.path.insert(0, './src')
+app = Flask(__name__, template_folder='webapp/templates', static_folder='webapp/static')
 
-# Import modules from src
-from app_scripts import *
-from neural_network import *
-
-app = Flask(__name__)
+from webapp.scripts import *
 
 def load_model():
-    # Load model
-    model = torch.load('model/model.pt', map_location=torch.device('cpu'))
+    """Loads model for text generation.
 
+    Returns:
+        Model and vocabulary objects.
+    
+    """
     # Load vocab
-    vocab = torch.load('model/vocab')
+    vocab = torch.load('webapp/static/model/vocab')
+
+    # Model parameters
+    BATCH_SIZE = 512
+    VOCAB_SIZE = len(vocab)
+    EMBEDDING_DIM = 300
+    HIDDEN_DIM = 512
+    OUTPUT_DIM = len(vocab)
+    N_LAYERS = 2
+    BIDIRECTIONAL = False
+    DROPOUT = 0.5
+    PAD_IDX = vocab.stoi['<pad>']
+
+    # Load model
+    model = TextGenerator(VOCAB_SIZE, EMBEDDING_DIM, HIDDEN_DIM, OUTPUT_DIM, N_LAYERS, BIDIRECTIONAL, DROPOUT, PAD_IDX)
+    model.load_state_dict(torch.load('webapp/static/model/model_params.pt', map_location=device))
 
     return model, vocab.stoi, vocab.itos
 
 
+# Load model
+model, vocab_stoi, vocab_itos = load_model()
+
 @app.route('/', methods=['GET', 'POST'])
 def generate():
-    # Load model
-    model, vocab_stoi, vocab_itos = load_model()
 
     if request.method == 'POST':
         seed_text = request.form['seed_text']
-        gen_length = int(request.form['gen_length'])        
+        gen_length = int(request.form['gen_length'])
 
-        generated = generate_text(model, gen_length, seed_text, vocab_stoi, vocab_itos, end_words=False, repeats=False)
+        generated = generate_text(model, gen_length, seed_text, vocab_stoi, vocab_itos, repeats=False)
         return render_template('generated.html', generated_text=generated)
 
     elif request.method == 'GET':
         return render_template('main.html')
 
 if __name__ == '__main__':
-    app.run()
+    main.run(debug=True)

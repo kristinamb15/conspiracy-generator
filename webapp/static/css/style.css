@@ -1,0 +1,337 @@
+/* General reset */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+/* General styles */
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #e0e1e1;
+    box-sizing: border-box;
+    background-image: linear-gradient(to right bottom, rgba(55, 53, 59, 0.8), rgba(36, 35, 37, 0.8)), url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+::selection {
+    background-color: rgb(14, 143, 42);
+    color: #e0e1e1;
+}
+
+.container {
+    padding: 2rem 3rem 2rem 3rem;
+    width: 95%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'title'
+                         'form'
+                         'footer';
+    justify-items: center;
+    align-content: space-between;        
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+/* Main title */
+.main_title {
+    grid-area: title;
+    align-self: start;
+    text-align: center;
+    font-weight: 400;
+    font-size: 7rem;
+    font-family: 'Barrio', cursive;
+    text-shadow: 2px 2px 8px rgb(14, 143, 42);
+}
+
+/* Form */
+.form_container {
+    width: 80%;
+    grid-area: form;
+    display: grid;
+    row-gap: 3rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 2fr;
+    grid-template-areas: 'input-text'
+                         'input-length'
+                         'button'
+                         'response';
+    justify-items: center;
+    align-items: start;
+    align-content: center;
+}
+
+.form_text {
+    grid-area: input-text;
+}
+
+.form_length {
+    grid-area: input-length;
+}
+
+/* Seed/length form containers */
+.input_container {
+    display: grid;
+    width: 100%;
+    row-gap: .5rem;
+    column-gap: 2rem;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 'label input'
+                         'instruct instruct';
+    justify-items: center;
+    align-items: start;
+}
+
+/* Form labels */
+label {
+    font-size: 2.5rem;
+    font-family: 'Barriecito', cursive;
+    justify-self: end;
+}
+
+.label_text {
+    grid-area: label;
+}
+
+.label_length {
+    grid-area: label;
+}
+
+/* Form input fields */
+.input {
+    background-color: #e0e1e1;
+    border: none;
+    padding: 1rem;
+    border-radius: 3px;
+    font-size: 1.5rem;
+    justify-self: start;
+}
+
+.input:focus {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.input_text {
+    grid-area: input;
+    width: 50%;
+    height: 5rem;
+}
+
+.input_length {
+    grid-area: input;
+    width: 10%;
+    height: 3rem;
+}
+
+/* Form istructions */
+.instruct{
+    font-size: 1.5rem;
+    font-weight: 400;
+    align-self: center;
+    text-align: center;
+}
+
+.instruct_text {
+    grid-area: instruct;
+}
+
+.instruct_length {
+    grid-area: instruct;
+}
+
+/* Button */
+.form_button {
+    grid-area: button;
+    display: flex;
+    gap: 5rem;
+}
+
+.button {
+    border-radius: 1rem;
+    background-color: #bb4430;
+    color: #e0e1e1;
+    text-transform: uppercase;
+    padding: 1rem 1rem;
+    height: 5rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all .3s;
+    font-size: 1.5rem;
+}
+
+.button:hover {
+    transform: scale(1.2) translate3d(0, 0, 1px);
+    perspective: 1px;
+    box-shadow: 0 5px 5px rgb(0, 0, 0, 0.6);
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:active {
+    transform: scale(0.9) translate3d(0, 0, 0);
+    filter: none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+.redo {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+/* Generated text */
+.response {
+    grid-area: response;
+    padding: 1rem;
+    font-size: 2.25rem;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgb(14, 143, 42);
+    background-color: rgba(19, 19, 20, 0.705);
+    border-radius: 5px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* Footer */
+.footer {
+    grid-area: footer;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 'fav copyright git';
+    text-align: center;
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: center;
+    align-self: end;
+    justify-self: stretch;
+}
+
+.footer_item {
+    font-size: 1rem;
+    backface-visibility: hidden;
+}
+
+.github_link {
+    grid-area: git;
+    transition: all .3s;
+    backface-visibility: hidden;
+}
+
+.github_link > a > img {
+    vertical-align: middle;
+    height: 2rem;
+    margin: 0 .5rem;
+    filter: invert(95%) sepia(6%) saturate(21%) hue-rotate(131deg) brightness(97%) contrast(88%);
+}
+
+.copy {
+    grid-area: copyright;
+}
+
+.favicon_link {
+    grid-area: fav;
+    transition: all .3s;
+}
+
+a:link,
+a:active,
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+.github_link:hover,
+.favicon_link:hover {
+    transform: scale(1.2) translate3d(0, 0, 1px);
+    perspective: 1px;
+    text-shadow: 0 5px 5px rgb(192, 76, 253, 0.6);    
+}
+
+.github_link:hover > a > img {    
+    filter: invert(95%) sepia(6%) saturate(21%) hue-rotate(131deg) brightness(97%) contrast(88%) drop-shadow(0 5px 5px rgb(192, 76, 253, 0.6));
+}
+
+
+/* Media queries */
+
+
+/*
+///   The break point for the media query (note: 1em = 16px).
+///     phone-mid: 400px  - some strange things happened here   25em
+///     phone: 0 - 600px   37.5em
+///     tab-port-mid: 800px - some strange things happened here   50em
+///     tab-port (portrait): 600 - 900px   56.25em
+///     tab-land (landscape): 900 - 1200px   75em
+///     normal styles: 1200 - 1800px   
+///     big-desktop: 1800px + 112.5em
+*/
+
+/* tab-landscape 900-1200 px */
+@media only screen and (max-width: 75em){
+    html {
+        font-size: 56.25%;
+    }
+
+    .main_title {
+        font-size: 6rem;
+    }
+}
+
+/* tab-portrait 600-900 px */
+@media only screen and (max-width: 56.25em){
+    html {
+        font-size: 50%;
+    }
+}
+
+/* phone 0-600 px */
+@media only screen and (max-width: 37.5em){
+
+}
+
+/* big-desktop 1800+ px */
+@media only screen and (min-width: 112.5em){
+    html {
+        font-size: 75%;
+    }
+}
+
+
+/*
+FONTS
+
+font-family: 'Barriecito', cursive;
+font-family: 'Barrio', cursive;
+font-family: 'Lato', sans-serif;
+font-family: 'Share Tech Mono', monospace;
+
+
+COLORS
+
+orange: 187, 68, 48
+khaki: 196, 175, 154
+charcoal: 69, 72, 81
+green: 14, 143, 42
+lt gray: 224, 225, 225
+purple: 192, 76, 253
+*/

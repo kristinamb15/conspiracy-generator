@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block generated %}
+    <div class='response'>
+        {{ generated_text }}
+    </div>  
+{% endblock %}
+
+{% block button %}
+    <button class='redo button' name='submit_button' type='submit' onclick="reload()">Re-generate previous<br>(no retyping needed)</button>
+{% endblock %} 

@@ -1,15 +1,9 @@
 # Text generating neural network and associated fucntions
 
 # Commented for webapp purposes - uncomment to run as script
-# from utilities import *
-
-# Torch imports - uncomment if using utilities import
-import torch
-from torch import nn
-import torch.nn.functional as F
+from utilities import *
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-
 
 # Define NN
 class TextGenerator(nn.Module):

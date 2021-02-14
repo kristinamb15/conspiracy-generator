@@ -76,11 +76,7 @@ if __name__ == '__main__':
     # Define model
     VOCAB_SIZE = len(TEXT.vocab)
     EMBEDDING_DIM = 300
-    #HIDDEN_DIM = 256
     OUTPUT_DIM = len(TEXT.vocab)
-    #N_LAYERS = 4
-    #BIDIRECTIONAL = True
-    #DROPOUT = 0.5
     PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
     model = TextGenerator(VOCAB_SIZE, EMBEDDING_DIM, HIDDEN_DIM, OUTPUT_DIM, N_LAYERS, BIDIRECTIONAL, DROPOUT, PAD_IDX)
