@@ -6,6 +6,13 @@
         <link rel="shortcut icon" type="image/jpg" href={{ url_for('static', filename='img/favicon.png') }}>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Barrio&family=Lato:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Conspiracy Theory Generator App" />
+        <meta name="title" property="og:title" content="Conspiracy Theory Generator" />
+        <meta property="og:type" content="Website" />
+        <meta name="image" property="og:image" content={{ url_for('static', filename='img/thumbnail.png') }} />
+        <meta name="description" property="og:description" content="Conspiracy Theory Generator App" />
+        <meta name="author" content="Kristina Brantley" />
     </head>
     <body>
         <div class='container'>
@@ -21,8 +28,11 @@
                         placeholder="How do you want your theory to start?"
                         required 
                         rows="3" cols="30"></textarea>
-                    <p class='instruct instruct_text'>Enter the starting text of your theory - it helps if you include a noun, verb, and preposition/adverb. <br>
-                    For example: 'puppies secretly plotted to'</p>
+                        <div class='instruct instruct_text'>
+                            Enter the starting text of your theory - it helps if you include a noun, verb, and preposition/adverb.
+                            <br>
+                            For example: 'puppies secretly plotted to'
+                        </div>
                 </div>
                 <div class='input_container form_length'>
                     <label class='label_length'>Length:</label>
@@ -31,7 +41,7 @@
                         type="number" 
                         name="gen_length"
                         required/>
-                    <p class='instruct instruct_length'>Enter the number of words to generate (this does not include your seed words).</p>
+                    <div class='instruct instruct_length'>Enter the number of words to generate (this does not include your seed words).</div>
                 </div>
                 
                 <div class='form_button'>
