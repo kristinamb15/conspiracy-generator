@@ -92,7 +92,7 @@ body {
     grid-template-areas: 'label input'
                          'instruct instruct';
     justify-items: center;
-    align-items: start;
+    align-items: center;
 }
 
 /* Form labels */
