@@ -41,7 +41,7 @@ model, vocab_stoi, vocab_itos = load_model()
 @app.route('/', methods=['GET', 'POST'])
 def generate():
 
-    thumb = request.base_url + 'preview/static/img/thumbnail.png'
+    thumb = request.base_url + 'static/img/thumbnail.png'
 
     if request.method == 'POST':
         seed_text = request.form['seed_text']
