@@ -22,21 +22,21 @@ To try it yourself, check out my [web application](https://conspiracy-generator.
 
 ## **The Important Stuff**
 
-### ⚫ The Web App
+### 👽 The Web App
 
 Flask was used to deploy the model with Heroku.
 
-### ⚫ Licensing & Use
+### 👽 Licensing & Use
 
  - The files in this project are free for appropriate use under the Mozilla Public License 2.0 (see [LICENSE](LICENSE)).
 
-### ⚫ Setup (if you want to run any of it)
+### 👽 Setup (if you want to run any of it)
 
 Install environment (located in the ```env``` directory): 
 
     conda env create -f environment.yml
 
-### ⚫ Files
+### 👽 Files
 
     📦TextGenerator
     ┣ 📂env
@@ -79,7 +79,7 @@ Install environment (located in the ```env``` directory):
 
 ## **Data Collection & Preparation**
 
-### ⚫ Text Collection
+### 👽 Text Collection
 
     scrape_source.py
 
@@ -87,13 +87,13 @@ The Wikipedia [Category: Conspiracy theories in the United States](https://en.m.
 
 A dataframe consisting of the urls and their text content was saved (due to large file size, the ```data``` directory is omitted from the repository).
 
-### ⚫ Text Processing
+### 👽 Text Processing
 
     process_text.py
 
 Basic cleaning of text (lowercasing, removing punctuation/non-alphanumeric characters, removing citations of the form '[81]', removing '[citation needed]', etc.) was performed on the text column of the dataframe. This process was actually done a number of times to obtain different datasets (with/without stop words or hyphens). These columns were added to the dataframe created above and the file re-saved. 
 
-### ⚫ Data Preparation
+### 👽 Data Preparation
 
     prepare_data.py
 
@@ -107,7 +107,7 @@ A data frame was created for each text collection consisting of all text and tar
 
 ## **The Neural Network**
 
-### ⚫ Defining the Network
+### 👽 Defining the Network
 
     neural_network.py
 
@@ -115,7 +115,7 @@ The neural network along with functions for counting parameters, training, and e
 
 An LSTM with the option to have bidirectional layers is used, though output is better when bidirectional is set to ```False```, since we're working with just a long string of words.
 
-### ⚫ Defining Parameters and Training the Model
+### 👽 Defining Parameters and Training the Model
 
     model.py
 
