@@ -41,7 +41,7 @@ model, vocab_stoi, vocab_itos = load_model()
 @app.route('/', methods=['GET', 'POST'])
 def generate():
 
-    thumb = request.base_url + 'static/img/thumbnail.png'
+    thumb = request.base_url + 'preview/static/img/thumbnail.png'
 
     if request.method == 'POST':
         seed_text = request.form['seed_text']
@@ -53,9 +53,10 @@ def generate():
     elif request.method == 'GET':
         return render_template('main.html', thumb=thumb)
 
-@app.route('/preview', methods=['GET'])
+@app.route('/preview')
 def preview():
-    return app.send_static_file('img/thumbnail.png')
+    return render_template('preview.html')
+    #return app.send_static_file('img/thumbnail.png')
 
 if __name__ == '__main__':
     main.run(debug=True)
