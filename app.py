@@ -1,6 +1,6 @@
 # Web app to deploy model
 
-from flask import Flask, render_template, render_template_string, request
+from flask import Flask, render_template, request
 import torch
 
 app = Flask(__name__, template_folder='webapp/templates', static_folder='webapp/static')
@@ -52,11 +52,6 @@ def generate():
 
     elif request.method == 'GET':
         return render_template('main.html', thumb=thumb)
-
-@app.route('/preview')
-def preview():
-    return render_template('preview.html')
-    #return app.send_static_file('img/thumbnail.png')
 
 if __name__ == '__main__':
     main.run(debug=True)
