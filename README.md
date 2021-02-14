@@ -13,11 +13,11 @@ Here's an example (seed text in *italics*):
 To try it yourself, check out my [web application](https://conspiracy-generator.herokuapp.com/)!
 
 **Language:** Python <br>
-**Libraries/Modules for Standard Things:** os, sys, time, random, numpy, pandas
+**Libraries/Modules for Standard Things:** os, sys, time, random, numpy, pandas <br>
 **Libraries for Scraping/Data Collection:** re, requests, bs4, pandas, numpy <br>
-**Libraries for Loss Visualization:** matplotlib, seaborn
-**Libraries for NLP:** nltk
-**Libraries for Neural Network:** torch, torchtext
+**Libraries for Loss Visualization:** matplotlib, seaborn <br>
+**Libraries for NLP:** nltk <br>
+**Libraries for Neural Network:** torch, torchtext <br>
 **Libraries for Web App:** flask
 
 ## **The Important Stuff**
