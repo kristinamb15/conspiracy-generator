@@ -41,15 +41,17 @@ model, vocab_stoi, vocab_itos = load_model()
 @app.route('/', methods=['GET', 'POST'])
 def generate():
 
+    thumb = request.base_url + 'static/img/background.jpg'
+
     if request.method == 'POST':
         seed_text = request.form['seed_text']
         gen_length = int(request.form['gen_length'])
 
         generated = generate_text(model, gen_length, seed_text, vocab_stoi, vocab_itos, repeats=False)
-        return render_template('generated.html', generated_text=generated)
+        return render_template('generated.html', generated_text=generated, thumb=thumb)
 
     elif request.method == 'GET':
-        return render_template('main.html')
+        return render_template('main.html', thumb=thumb)
 
 if __name__ == '__main__':
     main.run(debug=True)
