@@ -10,9 +10,6 @@
 /* General styles */
 html {
     font-size: 62.5%;
-    background-image: url(../img/thumbnail.png);
-    background-repeat: no-repeat;
-    background-size: contain;
 }
 
 body {

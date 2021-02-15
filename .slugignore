@@ -1,3 +1,5 @@
-example.PNG
 src/
-environment.yml
+env/
+LICENSE
+README.md
+thumbnail.png
