@@ -31,14 +31,15 @@ body {
 
 .container {
     padding: 1rem;
-    min-height: 100vh;
+    height: 100vh;
     display: grid;
-    grid-auto-rows: auto 1fr min-content;
+    grid-auto-columns: auto;
+    grid-template-rows: min-content 1fr min-content;
     grid-template-areas: 'title'
                          'form'
                          'footer';
     justify-items: center;
-    justify-content: center;
+    justify-content: stretch;
     align-content: space-between;        
 }
 
@@ -219,15 +220,13 @@ label {
 .footer {
     grid-area: footer;
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: max-content;
     grid-template-areas: 'fav copyright git';
-    text-align: center;
-    justify-content: space-between;
-    align-content: space-between;
+    justify-content: space-around;
+    align-content: space-around;
     align-items: center;
     align-self: end;
-    justify-self: stretch;
 }
 
 .footer_item {
@@ -235,6 +234,7 @@ label {
     font-size: 1rem;
     backface-visibility: hidden;
     margin: auto;
+    text-align: center;
 }
 
 .github_link {
