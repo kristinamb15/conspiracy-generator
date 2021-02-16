@@ -171,7 +171,7 @@ A number of resources were consulted in making this project.
 
 - [Build a Natural Language Generation (NLG) System using PyTorch](https://www.analyticsvidhya.com/blog/2020/08/build-a-natural-language-generation-nlg-system-using-pytorch/): for understanding how to prepare data (creating text and target sequences) and predict words after training.
 
-- [Beginners Guide to Text Generation (Pytorch)](https://www.kaggle.com/ab971631/beginners-guide-to-text-generation-pytorch])
+- [Beginners Guide to Text Generation (Pytorch)](https://www.kaggle.com/ab971631/beginners-guide-to-text-generation-pytorch)
 
 - [These](https://ai.stackexchange.com/questions/3156/how-to-select-number-of-hidden-layers-and-number-of-memory-cells-in-an-lstm) [different](https://minimaxir.com/2018/05/text-neural-networks/) [posts](https://stats.stackexchange.com/questions/181/how-to-choose-the-number-of-hidden-layers-and-nodes-in-a-feedforward-neural-netw): for understanding how to choose dimensions.
 
