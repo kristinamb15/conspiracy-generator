@@ -30,11 +30,10 @@ body {
 }
 
 .container {
-    padding: 2rem 3rem 2rem 3rem;
-    width: 100vw;
+    padding: 1rem;
     min-height: 100vh;
     display: grid;
-    grid-auto-rows: min-content 1fr min-content;
+    grid-auto-rows: auto 1fr min-content;
     grid-template-areas: 'title'
                          'form'
                          'footer';
@@ -46,12 +45,11 @@ body {
 /* Main title */
 .main_title {
     grid-area: title;
-    align-self: start;
     text-align: center;
     font-weight: 400;
-    font-size: 8rem;
+    font-size: 7.5rem;
     font-family: 'Barrio', cursive;
-    text-shadow: 2px 2px 8px rgb(14, 143, 42);
+    text-shadow: .2rem .2rem .8rem rgb(14, 143, 42);
 }
 
 /* Form */
@@ -59,7 +57,6 @@ body {
     width: 85%;
     grid-area: form;
     display: grid;
-    grid-auto-rows: auto;
     grid-template-areas: 'input-text'
                          'input-length'
                          'button'
@@ -67,7 +64,7 @@ body {
     justify-items: center;
     justify-content: center;
     align-items: center;
-    align-content: space-evenly;
+    align-content: space-around;
 }
 
 .form_text {
@@ -81,14 +78,10 @@ body {
 /* Seed/length form containers */
 .input_container {
     display: grid;
-    max-width: 90%;
-    row-gap: .5rem;
-    column-gap: 2rem;
-    grid-auto-columns: minmax(max-content, 1fr) minmax(max-content, 2fr);
-    /* grid-template-columns: 1fr 2fr; */
-    grid-auto-rows: auto;
-    grid-template-areas: 'label input'
-                         'instruct instruct';
+    row-gap: 1rem;
+    grid-template-areas: 'instruct'
+                         'example'
+                         'label-box';
     justify-content: center;
     align-items: center;
 }
@@ -97,15 +90,23 @@ body {
 label {
     font-size: 3rem;
     font-family: 'Barriecito', cursive;
-    justify-self: end;
+    text-transform: uppercase;
+    text-align: right;
+    text-shadow: .1rem .1rem .4rem rgb(14, 143, 42);
 }
 
-.label_text {
-    grid-area: label;
+.label_box {
+    grid-area: label-box;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    gap: 2rem;
 }
 
-.label_length {
-    grid-area: label;
+.label_box > textarea {
+    resize: none;
+    flex-grow: 0.5;
 }
 
 /* Form input fields */
@@ -115,38 +116,36 @@ label {
     padding: 1rem;
     border-radius: 3px;
     font-size: 1.75rem;
-    justify-self: start;
 }
 
 .input:focus {
     outline: none;
 }
 
-textarea {
-    resize: none;
-}
-
-.input_text {
-    grid-area: input;
-    height: 5rem;
-    width: 75%;
-}
-
 .input_length {
-    grid-area: input;
-    width: 15%;
+    max-width: 10rem;
     height: 3rem;
 }
 
 /* Form istructions */
 .instruct{
     display: flex;
-    flex-direction: column;
+    align-content: center;
+    justify-content: center;
     flex-wrap: wrap;
     font-size: 1.75rem;
-    font-weight: 400;
-    align-self: center;
     text-align: center;
+}
+
+.example {
+    grid-area: example;
+    background-color: rgba(19, 19, 20, 0.705);
+    border-radius: 1rem;
+    padding: .5rem 1rem;
+    justify-self: center;
+    margin: auto;
+    color: rgb(224, 225, 225, 0.8);
+    font-size: 1.5rem;
 }
 
 .instruct_text {
@@ -167,6 +166,8 @@ textarea {
 .button {
     display: flex;
     align-content: center;
+    justify-content: center;
+    align-items: center;
     border-radius: 1rem;
     background-color: #bb4430;
     color: #e0e1e1;
@@ -177,7 +178,7 @@ textarea {
     cursor: pointer;
     border: none;
     transition: all .3s;
-    font-size: 2.25rem;
+    font-size: 2rem;
 }
 
 .button:hover {
@@ -197,9 +198,6 @@ textarea {
 }
 
 .redo {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
     font-size: 1.5rem;
 }
 
@@ -214,6 +212,7 @@ textarea {
     background-color: rgba(19, 19, 20, 0.705);
     border-radius: 5px;
     font-family: 'Share Tech Mono', monospace;
+    margin: auto;
 }
 
 /* Footer */
@@ -221,6 +220,7 @@ textarea {
     grid-area: footer;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: max-content;
     grid-template-areas: 'fav copyright git';
     text-align: center;
     justify-content: space-between;
@@ -231,8 +231,10 @@ textarea {
 }
 
 .footer_item {
+    display: flex;
     font-size: 1rem;
     backface-visibility: hidden;
+    margin: auto;
 }
 
 .github_link {
@@ -268,11 +270,11 @@ a:visited {
 .favicon_link:hover {
     transform: scale(1.2) translate3d(0, 0, 1px);
     perspective: 1px;
-    text-shadow: 0 5px 5px rgb(192, 76, 253, 0.6);    
+    text-shadow: 0 .5rem .5rem rgb(192, 76, 253, 0.6);    
 }
 
 .github_link:hover > a > img {    
-    filter: invert(95%) sepia(6%) saturate(21%) hue-rotate(131deg) brightness(97%) contrast(88%) drop-shadow(0 5px 5px rgb(192, 76, 253, 0.6));
+    filter: invert(95%) sepia(6%) saturate(21%) hue-rotate(131deg) brightness(97%) contrast(88%) drop-shadow(0 .5rem .5rem rgb(192, 76, 253, 0.6));
 }
 
 
@@ -314,8 +316,8 @@ a:visited {
         font-size: 45%;
     }
 
-    .container {
-        padding: 0rem;
+    .footer_item {
+        flex-direction: column;
     }
 
     .main_title {
@@ -328,14 +330,6 @@ a:visited {
     html {
         font-size: 42%;
     }
-
-    .container {
-        padding: 0rem;
-    }    
-
-    .main_title {
-        font-size: 5rem;
-    }
 }
 
 /* sm-phone 0-400 px */
@@ -343,16 +337,12 @@ a:visited {
     html {
         font-size: 35%;
     }
-
-    .main_title {
-        font-size: 4.5rem;
-    }
 }
 
 /* big-desktop 1800+ px */
 @media only screen and (min-width: 112.5em) {
     html {
-        font-size: 75%;
+        font-size: 70%;
     }
 }
 

@@ -20,28 +20,32 @@
           
             <form id='form' action="{{ url_for('generate')}}" method="post" class='form_container'>
                 <div class='input_container form_text'>
-                    <label class='label_text'>Seed Text:</label>
-                    <textarea 
-                        class='input input_text' 
-                        type="text" 
-                        name="seed_text"
-                        placeholder="How do you want your theory to start?"
-                        required 
-                        rows="3" cols="30"></textarea>
-                        <div class='instruct instruct_text'>
-                            Enter the starting text of your theory - it helps if you include a noun, verb, and preposition/adverb.
-                            <br>
-                            For example: 'puppies secretly plotted to'
-                        </div>
+                    <div class='label_box'>
+                        <label>Seed Text:</label>
+                        <textarea 
+                            class='input input_text' 
+                            type="text" 
+                            name="seed_text"
+                            placeholder="How do you want your theory to start?"
+                            required 
+                            rows="3"></textarea>
+                    </div>                    
+                    <div class='instruct instruct_text'>
+                        Enter the starting text of your theory (no punctuation) - it helps if you include a noun, verb, and preposition/adverb.
+                    </div>
+                    <div class='instruct example'>For example: 'puppies secretly plotted to'</div>
                 </div>
                 <div class='input_container form_length'>
-                    <label class='label_length'>Length:</label>
-                    <input 
-                        class='input input_length' 
-                        type="number" 
-                        name="gen_length"
-                        required/>
+                    <div class='label_box'>
+                        <label>Number of Words:</label>
+                        <input 
+                            class='input input_length' 
+                            type="number" 
+                            name="gen_length"
+                            required/>
+                    </div>
                     <div class='instruct instruct_length'>Enter the number of words to generate (this does not include your seed words).</div>
+                    <div class='instruct example'>Try the above example with length 5 to see how it works!</div>
                 </div>
                 
                 <div class='form_button'>
@@ -57,7 +61,7 @@
 
             <footer class='footer'>
                 <div class='footer_item copy'>
-                    Copyright &copy; 2021 Kristina Brantley. All rights reserved.
+                    <p>Copyright &copy; 2021 Kristina Brantley.&nbsp;</p><p>All rights reserved.</p>
                 </div>
                 <div class='footer_item favicon_link'>
                     <a target="_blank" href="https://icons8.com/icons/set/planet-globe">UFO favicon by Icons8</a>

@@ -3,6 +3,7 @@
 # Standard imports
 import numpy as np
 import random
+import string
 
 # NN imports
 import torch
@@ -118,14 +119,17 @@ def generate_text(model, gen_len, text, token2int, int2token, repeats=False):
     # Batch size is 1 (single text example)
     hidden = model.init_hidden(1)
 
+    # Remove punctuation
+    text = ''.join([char for char in text if char not in string.punctuation])
+
     # Split text into tokens
     tokens = text.lower().split()
 
     # Pass wordlist if checking for repeats
     if repeats:
-        wordlist = tokens
+        wordlist = tokens + ['<unk>', '<pad>']
     else:
-        wordlist = None
+        wordlist = ['<unk>', '<pad>']
 
     # Predict next word
     for token in tokens:
